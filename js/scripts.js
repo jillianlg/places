@@ -47,20 +47,41 @@ function displayPlacesDetails(travelToDisplay){
   travelToDisplay.places.forEach(function(place){
     htmlForPlaceInfo += "<li id=" + place.id + ">" + place.country + " " + place.cityName + "</li>";
   });
-  placesList.html(htmlForPlaceInfo);
-  displayPlacesDetails(travel);  
+  placesList.html(htmlForPlaceInfo);  
+};
+
+
+function showPlace(placeId) {
+  const place = travel.findPlace(placeId);
+  $("#show-place").show();
+  $(".country").html(place.country);
+  $(".state").html(place.stateName);
+  $(".city").html(place.cityName);
+  $(".landmark").html(place.landmark);
+  $(".dateRange").html(place.dateRange);
+  $(".notes").html(place.notes);
+
+
+}
+
+function attachPlaceListeners() {
+  $("ul#places").on("click", "li", function(){
+    showPlace(this.id);
+  });
 };
 
 $(document).ready(function(){
+  attachPlaceListeners();
   $("#formOne").submit(function(event){
     event.preventDefault();
     const inputtedCountryName = $("input#country").val();
     const inputtedStateName = $("input#state").val();
+    const inputtedCityName = $("input#city").val();
     const inputtedLandmarkName = $("input#landmark").val();
     const inputtedDateRange = $("input#dateRange").val();
     const inputtedNotes = $("input#notes").val();
 
-    let newPlace = new Place(inputtedCountryName, inputtedStateName, inputtedLandmarkName, inputtedDateRange, inputtedNotes);
+    let newPlace = new Place(inputtedCountryName, inputtedStateName, inputtedCityName, inputtedLandmarkName, inputtedDateRange, inputtedNotes);
     travel.addPlace(newPlace);
     displayPlacesDetails(travel);
     
