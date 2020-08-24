@@ -12,7 +12,27 @@
 
 // Business Interface
 
+function Places() {
+    this.places = [];
+    if (this.places = undefined){
+      alert("Whoops! You forgot to enter something. Try again!");
+    } else {
+      return ("success!");
+    }
+}
 
+// function Places(country, stateName, cityName, landmark, dateRange, notes) {
+//     this.country = country;
+//     this.stateName = stateName;
+//     this.cityName = cityName;
+//     this.landmark = landmark;
+//     this.dateRange = dateRange;
+//     this.notes = notes;
+// }
+
+
+
+let place1 = new Places("USA", "Washington", "Seattle", "Space Needle", "2012", "With Friends");
 
 // User Interface
 
