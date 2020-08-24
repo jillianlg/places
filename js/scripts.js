@@ -27,24 +27,45 @@ function Travel() {
 
 // Business Logic for Places
 
-function Place(country, stateName, cityName) {
+function Place(country, stateName, cityName, landmark, dateRange, notes) {
     this.country = country;
     this.stateName = stateName;
     this.cityName = cityName;
-    
+    this.landmark = landmark;
+    this.dateRange = dateRange;
+    this.notes = notes;
+
 }
-// let city1 = new Place("USA", "Washington", "Seattle", "Space Needle", "2012", "With Friends");
-// let city2 = new Place("USA", "Oregon", "Portland", "Mulnomah Falls", "2011", "With Family");
-// Travel.addPlace (city1);
-// Travel.addPlace (city2);
 
-// User Interface
 
-// Alert moved from Business Interface
-// if (this.places.length(); === 0){
-//   console.log("Whoops! You forgot to enter something. Try again!");
-// } else {
-//   console.log("success!");
-// }
-// }
+// User Interface logic
+let travel = new Travel();
 
+function displayPlacesDetails(travelToDisplay){
+  let placesList = $("ul#places");
+  let htmlForPlaceInfo = "";
+  travelToDisplay.places.forEach(function(place){
+    htmlForPlaceInfo += "<li id=" + place.id + ">" + place.country + " " + place.cityName + "</li>";
+  });
+  placesList.html(htmlForPlaceInfo);
+  displayPlacesDetails(travel);  
+};
+
+$(document).ready(function(){
+  $("#formOne").submit(function(event){
+    event.preventDefault();
+    const inputtedCountryName = $("input#country").val();
+    const inputtedStateName = $("input#state").val();
+    const inputtedLandmarkName = $("input#landmark").val();
+    const inputtedDateRange = $("input#dateRange").val();
+    const inputtedNotes = $("input#notes").val();
+
+    let newPlace = new Place(inputtedCountryName, inputtedStateName, inputtedLandmarkName, inputtedDateRange, inputtedNotes);
+    travel.addPlace(newPlace);
+    displayPlacesDetails(travel);
+    
+  
+
+
+  });
+});
