@@ -17,7 +17,7 @@ function Travel() {
   Travel.prototype.findPlace = function(id) {
     for (let i=0; i< this.places.length; i++) {
       if (this.places[i]) {
-        if (this.place[i].id == id) {
+        if (this.places[i].id == id) {
           return this.places[i];
         }
       }
@@ -27,13 +27,11 @@ function Travel() {
 
 // Business Logic for Places
 
-function Place(country, stateName, cityName, landmark, dateRange, notes) {
+function Place(country, stateName, cityName) {
     this.country = country;
     this.stateName = stateName;
     this.cityName = cityName;
-    this.landmark = landmark;
-    this.dateRange = dateRange;
-    this.notes = notes;
+    
 }
 // let city1 = new Place("USA", "Washington", "Seattle", "Space Needle", "2012", "With Friends");
 // let city2 = new Place("USA", "Oregon", "Portland", "Mulnomah Falls", "2011", "With Family");
