@@ -25,6 +25,18 @@ function Travel() {
     return false;
   }
 
+  Travel.prototype.deletePlace = function(id) {
+    for (let i=0; i< this.places.length; i++) {
+      if (this.places[i]) {
+        if (this.places[i].id == id) {
+          delete this.places[i];
+          return true;
+        }
+      }
+    };
+    return false;
+  }
+
 // Business Logic for Places
 
 function Place(country, stateName, cityName, landmark, dateRange, notes) {
@@ -45,7 +57,7 @@ function displayPlacesDetails(travelToDisplay){
   let placesList = $("ul#places");
   let htmlForPlaceInfo = "";
   travelToDisplay.places.forEach(function(place){
-    htmlForPlaceInfo += "<li id=" + place.id + ">" + place.country + " " + place.cityName + "</li>";
+    htmlForPlaceInfo += "<li id=" + place.id + ">" + place.country + " " + place.cityName;
   });
   placesList.html(htmlForPlaceInfo);  
 };
@@ -60,6 +72,9 @@ function showPlace(placeId) {
   $(".landmark").html(place.landmark);
   $(".dateRange").html(place.dateRange);
   $(".notes").html(place.notes);
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" + + place.id + ">Delete</button>");
 
 
 }
@@ -67,6 +82,11 @@ function showPlace(placeId) {
 function attachPlaceListeners() {
   $("ul#places").on("click", "li", function(){
     showPlace(this.id);
+  });
+  $("#buttons").on("click", ".deleteButton", function(){
+    travel.deletePlace(this.id);
+    $("#show-place").hide();
+    displayPlacesDetails(travel);
   });
 };
 
